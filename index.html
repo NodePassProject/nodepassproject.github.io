@@ -316,7 +316,7 @@
 $ nodepass "server://:10101/127.0.0.1:8080?log=debug&tls=1"
 
 # Start Client
-$ nodepass client://server.example.com:10101/127.0.0.1:8080
+$ nodepass "client://server:10101/127.0.0.1:8080?min=128"
 
 # Start Master API
 $ nodepass "master://:10101/api?log=debug&tls=1" </pre>
