@@ -49,11 +49,6 @@ Deploy to any static hosting service (GitHub Pages, Netlify, Vercel, etc.)
 - [NodePass GitHub Repository](https://github.com/yosebyte/nodepass)
 - [NodePass Documentation](https://github.com/yosebyte/nodepass/tree/main/docs)
 
-## License
-
-Copyright (c) 2025, NodePassProject. Licensed under the BSD 3-Clause License.
-See the [LICENCE](./LICENCE) file for details.
-
 ## Contact
 
 For landing page issues, please open an issue in this repository.

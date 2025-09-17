@@ -256,34 +256,34 @@ function initTerminalTyping() {
     observer.observe(terminalText.parentElement.parentElement);
 }
 
-/**
- * 初始化返回顶部按钮
- * 控制按钮的显示/隐藏和点击事件
+/** 初始化返回顶部按钮
+ * 当页面滚动超过一定距离时显示按钮，点击按钮平滑滚动到顶部
  */
 function initBackToTop() {
-    const backToTopButton = document.getElementById('back-to-top');
-    if (!backToTopButton) return;
-    
-    // 监听滚动事件来控制按钮显示/隐藏
-    window.addEventListener('scroll', () => {
-        const isVisible = window.scrollY > 300;
-        if (isVisible) {
-            backToTopButton.classList.remove('hidden');
-            setTimeout(() => backToTopButton.classList.remove('opacity-0'), 10); // 延迟添加透明度过渡效果
-        } else {
-            backToTopButton.classList.add('opacity-0');
-            setTimeout(() => backToTopButton.classList.add('hidden'), 300); // 等待透明度过渡完成后隐藏
-        }
-    });
-    
-    // 点击按钮滚动回顶部
-    backToTopButton.addEventListener('click', () => {
-        gsap.to(window, {
-            duration: 1.5, 
-            scrollTo: 0,
-            ease: "power2.out"
-        });
-    });
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    let visible = false, timeout;
+    const handler = () => {
+        if (timeout) return;
+        timeout = setTimeout(() => {
+            const show = window.scrollY > 300;
+            if (show !== visible) {
+                visible = show;
+                if (show) {
+                    btn.classList.remove('hidden');
+                    requestAnimationFrame(() => btn.classList.remove('opacity-0'));
+                } else {
+                    btn.classList.add('opacity-0');
+                    setTimeout(() => !visible && btn.classList.add('hidden'), 300);
+                }
+            }
+            timeout = null;
+        }, 16);
+    };
+
+    window.addEventListener('scroll', handler, { passive: true });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
 /**
@@ -316,7 +316,7 @@ function initLanguageToggle() {
             'repository': 'Repository',
             'subtitle': 'NodePass is a secure, efficient TCP/UDP tunneling solution that delivers fast, reliable access across network restrictions using pre-established TLS/TCP connections.',
             'github': 'GitHub Project',
-            'learn-more': 'Coming Soon',
+            'learn-more': 'App Store',
             'features-title': 'Core Features',
             'feature1-title': 'High-Performance Tunnel',
             'feature1-desc': 'Lightweight tunnel implemented in Go, with extremely low latency and high throughput, supporting large-scale concurrent connections.',
@@ -384,7 +384,7 @@ function initLanguageToggle() {
             'repository': '仓库',
             'subtitle': '通用TCP/UDP隧道解决方案，免配置单文件多模式，采用控制数据双路分离架构，内置零延迟自适应连接池，实现跨网络限制的快速安全访问。',
             'github': 'GitHub项目',
-            'learn-more': '即将推出',
+            'learn-more': 'App Store',
             'features-title': '核心特性',
             'feature1-title': '高性能隧道',
             'feature1-desc': '使用Go语言实现的轻量级隧道，具有极低的延迟和高吞吐量，支持大规模并发连接。',
