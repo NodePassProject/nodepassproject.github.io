@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
         initNavbar,              // 初始化导航栏交互
         initSmoothScroll,        // 初始化平滑滚动
         initTerminalTyping,      // 初始化终端打字动画
-        initBackToTop,           // 初始化返回顶部按钮
         initMobileMenu,          // 初始化移动端菜单
         initLanguageToggle,      // 初始化语言切换功能
         initArchitectureDiagram  // 初始化架构图交互
@@ -254,36 +253,6 @@ function initTerminalTyping() {
     }, { threshold: 0.5 });
     
     observer.observe(terminalText.parentElement.parentElement);
-}
-
-/** 初始化返回顶部按钮
- * 当页面滚动超过一定距离时显示按钮，点击按钮平滑滚动到顶部
- */
-function initBackToTop() {
-    const btn = document.getElementById('back-to-top');
-    if (!btn) return;
-
-    let visible = false, timeout;
-    const handler = () => {
-        if (timeout) return;
-        timeout = setTimeout(() => {
-            const show = window.scrollY > 300;
-            if (show !== visible) {
-                visible = show;
-                if (show) {
-                    btn.classList.remove('hidden');
-                    requestAnimationFrame(() => btn.classList.remove('opacity-0'));
-                } else {
-                    btn.classList.add('opacity-0');
-                    setTimeout(() => !visible && btn.classList.add('hidden'), 300);
-                }
-            }
-            timeout = null;
-        }, 16);
-    };
-
-    window.addEventListener('scroll', handler, { passive: true });
-    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
 /**
