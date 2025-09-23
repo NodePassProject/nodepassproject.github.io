@@ -268,6 +268,13 @@ function initMobileMenu() {
             // 切换菜单可见性
             mobileMenu.classList.toggle('hidden');
         });
+        
+        // 点击菜单项后关闭菜单
+        mobileMenu.addEventListener('click', (event) => {
+            if (event.target.tagName === 'A' || event.target.tagName === 'BUTTON') {
+                mobileMenu.classList.add('hidden');
+            }
+        });
     }
 }
 
