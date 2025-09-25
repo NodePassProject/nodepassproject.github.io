@@ -136,11 +136,6 @@ body {
   background: linear-gradient(to right, var(--blue-500), var(--purple-500));
 }
 
-/* 按钮悬停抬升效果 */
-.primary-btn:hover, .secondary-btn:hover {
-  transform: translateY(-2px);
-}
-
 .primary-btn:hover {
   box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
 }
@@ -279,7 +274,7 @@ body {
 
 /* 终端光标闪烁动画 */
 .terminal-text::after {
-  content: '|';
+  content: '█';
   animation: blink 1s step-end infinite;
 }
 

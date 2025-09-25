@@ -158,6 +158,43 @@ function initNavbar() {
  * 使锚点链接点击时实现平滑滚动到目标位置
  */
 function initSmoothScroll() {
+    // 自定义平滑滚动函数，使用 requestAnimationFrame 和 easeOutQuad easing
+    const smoothScrollTo = (target, duration = 300) => {
+        const start = window.pageYOffset;
+        const distance = target - start;
+        const startTime = performance.now();
+        
+        const easeOutQuad = t => t * (2 - t);
+        
+        const animation = currentTime => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            window.scrollTo(0, start + distance * easeOutQuad(progress));
+            if (progress < 1) requestAnimationFrame(animation);
+        };
+        requestAnimationFrame(animation);
+    };
+
+    // 初始化返回顶部按钮
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        // 监听滚动事件，控制按钮显示/隐藏
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.add('opacity-100');
+            } else {
+                backToTopBtn.classList.remove('opacity-100');
+                backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        // 点击按钮返回顶部
+        backToTopBtn.addEventListener('click', () => {
+            smoothScrollTo(0);
+        });
+    }
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -172,13 +209,10 @@ function initSmoothScroll() {
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             
-            // 使用原生平滑滚动到目标位置，考虑导航栏高度偏移
+            // 使用自定义平滑滚动到目标位置，考虑导航栏高度偏移
             if (targetElement) {
                 const offsetTop = targetElement.offsetTop - 80; // 顶部偏移，考虑固定导航栏高度
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
+                smoothScrollTo(offsetTop);
             }
         });
     });
@@ -288,8 +322,8 @@ function initLanguageToggle() {
             'documentation': 'Documentation',
             'repository': 'Repository',
             'subtitle': 'NodePass is a secure, efficient TCP/UDP tunneling solution that delivers fast, reliable access across network restrictions using pre-established TLS/TCP connections.',
-            'github': 'GitHub Project',
-            'learn-more': 'App Store',
+            'github': 'GitHub',
+            'learn-more': 'Install NodePass',
             'features-title': 'Core Features',
             'feature1-title': 'High-Performance Tunnel',
             'feature1-desc': 'Lightweight tunnel implemented in Go, with extremely low latency and high throughput, supporting large-scale concurrent connections.',
@@ -356,8 +390,8 @@ function initLanguageToggle() {
             'documentation': '文档',
             'repository': '仓库',
             'subtitle': '通用TCP/UDP隧道解决方案，免配置单文件多模式，采用控制数据双路分离架构，内置零延迟自适应连接池，实现跨网络限制的快速安全访问。',
-            'github': 'GitHub项目',
-            'learn-more': 'App Store',
+            'github': 'GitHub',
+            'learn-more': '安装NodePass',
             'features-title': '核心特性',
             'feature1-title': '高性能隧道',
             'feature1-desc': '使用Go语言实现的轻量级隧道，具有极低的延迟和高吞吐量，支持大规模并发连接。',
