@@ -172,15 +172,12 @@ function initSmoothScroll() {
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             
-            // 使用GSAP平滑滚动到目标位置
+            // 使用原生平滑滚动到目标位置，考虑导航栏高度偏移
             if (targetElement) {
-                gsap.to(window, {
-                    duration: 1,
-                    scrollTo: {
-                        y: targetElement,
-                        offsetY: 80  // 顶部偏移，考虑固定导航栏高度
-                    },
-                    ease: "power2.inOut"
+                const offsetTop = targetElement.offsetTop - 80; // 顶部偏移，考虑固定导航栏高度
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
                 });
             }
         });
