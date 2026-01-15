@@ -18,6 +18,7 @@ index.html           # Main landing page HTML
 scripts.js           # JavaScript functionality
 styles.css           # CSS styling
 icon/                # Favicon and related icons
+assets/              # Related resources
 ```
 
 ## Features
