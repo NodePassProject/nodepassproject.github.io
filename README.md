@@ -45,11 +45,6 @@ npx http-server
 
 Deploy to any static hosting service (GitHub Pages, Netlify, Vercel, etc.)
 
-## Related Links
-
-- [NodePass GitHub Repository](https://github.com/yosebyte/nodepass)
-- [NodePass Documentation](https://github.com/yosebyte/nodepass/tree/main/docs)
-
 ## Contact
 
 For landing page issues, please open an issue in this repository.
