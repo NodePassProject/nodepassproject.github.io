@@ -338,7 +338,7 @@ function drawConnectionLines() {
     const topServerRect = getElementRect(topServerElement);
     const topClientRect = getElementRect(topClientElement);
     const bottomServerRect = getElementRect(bottomServerElement);
-    const bottomClientRect = getElementRect(bottomClientRect);
+    const bottomClientRect = getElementRect(bottomClientElement);
     
     const topServerBottom = {
         x: topServerRect.left + topServerRect.width / 2,
